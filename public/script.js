@@ -2,26 +2,48 @@
 const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
 
-// Check for saved theme preference or default to light mode
-const savedTheme = localStorage.getItem('theme');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-// Apply saved theme or system preference
-if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    htmlElement.classList.add('dark-mode');
-    updateThemeIcon();
+// Auto dark mode for evening hours (18:00 - 06:00) with 3-hour preference storage
+function isEveningHours() {
+    const hour = new Date().getHours();
+    return hour >= 18 || hour < 6; // 18:00 - 06:00
 }
+
+function getThemePreference() {
+    const saved = localStorage.getItem('theme');
+    const savedTime = localStorage.getItem('themeTime');
+    
+    if (saved && savedTime) {
+        const timePassed = Date.now() - parseInt(savedTime);
+        const threeHours = 3 * 60 * 60 * 1000;
+        
+        // If less than 3 hours have passed, use saved preference
+        if (timePassed < threeHours) {
+            return saved;
+        }
+    }
+    
+    // No valid saved preference, use auto-detection based on time
+    return isEveningHours() ? 'dark' : 'light';
+}
+
+// Apply theme
+const theme = getThemePreference();
+if (theme === 'dark') {
+    htmlElement.classList.add('dark-mode');
+}
+updateThemeIcon();
 
 // Theme toggle event listener
 themeToggle.addEventListener('click', () => {
     htmlElement.classList.toggle('dark-mode');
     
-    // Save preference
+    // Save preference with timestamp
     if (htmlElement.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
     } else {
         localStorage.setItem('theme', 'light');
     }
+    localStorage.setItem('themeTime', Date.now().toString());
     
     updateThemeIcon();
 });

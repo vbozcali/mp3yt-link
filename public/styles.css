@@ -222,13 +222,12 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    border-bottom: 3px solid transparent;
+    border-bottom: none;
 }
 
 .nav-link:hover,
 .nav-link.active {
     color: var(--primary-red);
-    border-bottom-color: var(--primary-red);
 }
 
 .lang-dropdown {
