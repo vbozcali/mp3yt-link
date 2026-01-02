@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MP3YT - Convert YouTube videos to MP3. Free, fast, and secure YouTube to MP3 converter. Paste any YouTube link and download instantly.">
+    <meta name="keywords" content="youtube mp3, youtube to mp3, download mp3, music download, video to mp3, youtube converter, online mp3 converter, free youtube mp3, download youtube music">
+    <meta name="author" content="MP3YT">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="MP3YT - YouTube to MP3 Converter">
+    <meta property="og:description" content="Free and fast YouTube MP3 converter. Download any YouTube video as MP3 in seconds.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mp3yt.link/en">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MP3YT - YouTube to MP3 Converter">
+    <meta name="twitter:description" content="Free YouTube MP3 converter. Download music instantly.">
+    <title>MP3YT - YouTube to MP3 | Free YouTube MP3 Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MP3YT",
+        "description": "Convert YouTube videos to MP3. Free, fast, and secure YouTube MP3 converter.",
+        "url": "https://mp3yt.link/en",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "MP3YT"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon" aria-hidden="true"></div>
+                    <h1 class="logo-text">MP3YT</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active">Home</a></li>
+                    <li><a href="#how" class="nav-link">How It Works</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="lang-dropdown">
+                        <button class="lang-toggle" id="lang-toggle" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-globe"></i>
+                            <span id="lang-label">EN</span>
+                            <i class="fas fa-chevron-down caret"></i>
+                        </button>
+                        <div class="lang-menu" id="lang-menu" role="menu">
+                            <a class="lang-option" href="/" aria-label="Türkçe" role="menuitem" data-lang="tr">Türkçe</a>
+                            <a class="lang-option active" href="/en" aria-label="English" role="menuitem" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" id="theme-toggle" title="Dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h1 id="hero-title">Convert YouTube to MP3</h1>
+                    <p id="hero-sub">Fast, Easy, and Free YouTube MP3 Converter</p>
+                </div>
+                <div class="form-wrapper">
+                    <label for="url-input" class="input-label">
+                        <i class="fas fa-link"></i> <span id="label-url">YouTube Link</span>
+                    </label>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="url-input" 
+                            class="url-input" 
+                            placeholder="https://www.youtube.com/watch?v=..."
+                            aria-label="Enter YouTube URL"
+                        >
+                        <button class="btn btn-primary" id="convert-btn">
+                            <i class="fas fa-magic"></i> <span>Convert</span>
+                        </button>
+                    </div>
+                    <p class="input-hint" id="input-hint">Paste your YouTube video link and download it instantly as MP3</p>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <div class="result-card">
+                    <div class="song-info">
+                        <div class="thumbnail" id="thumbnail"></div>
+                        <div class="metadata">
+                            <h3 id="song-title">Title</h3>
+                            <p id="song-duration">Duration</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" id="download-btn">
+                        <i class="fas fa-download"></i> <span>Download</span>
+                    </button>
+                    <button class="btn btn-secondary" id="new-btn">
+                        <i class="fas fa-redo"></i> <span>New Conversion</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section" id="error-section" style="display: none;">
+                <div class="error-card">
+                    <p class="error-text">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Something went wrong</span>
+                    </p>
+                    <button class="btn btn-secondary" id="retry-btn">
+                        <i class="fas fa-redo"></i> <span>Try Again</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section class="status-section" id="status-section" style="display: none;">
+                <div class="status-card">
+                    <div class="spinner"></div>
+                    <p class="status-text" id="status-text">Converting...</p>
+                </div>
+            </section>
+
+            <!-- Input Section Features -->
+            <section class="input-section-features">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Fast</h3>
+                        <p>Convert in seconds</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Secure</h3>
+                        <p>Your data stays private</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Ready</h3>
+                        <p>Works on every device</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Free</h3>
+                        <p>No payment required</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEO Content Section -->
+            <section class="seo-content">
+                <div class="seo-text">
+                    <p>
+                        <strong>MP3YT</strong> is a leading <strong>online mp3 converter</strong> that <strong>converts YouTube videos to MP3</strong> quickly and securely. Millions of users trust MP3YT to <strong>download YouTube music</strong> without hassle. Turn any song, podcast, speech, or audio from YouTube into MP3 and download it in just seconds.
+                    </p>
+                    <p>
+                        No software installation needed—perform <strong>YouTube to MP3 downloads</strong> directly from your browser. MP3YT offers a <strong>free service</strong>, high audio quality (up to 320kbps), rapid conversion times, and a <strong>mobile-friendly</strong> interface. Use it on Windows, Mac, iPhone, or Android to <strong>download music from YouTube</strong> smoothly.
+                    </p>
+                    <p>
+                        Choosing MP3YT means a safe and responsible <strong>YouTube MP3 conversion</strong> experience. All actions run over encrypted connections, your data is not stored, and no intrusive ads disrupt you. Join millions of music lovers and enjoy your favorite tracks offline. Make <strong>YouTube MP3 downloads</strong> effortless with MP3YT.
+                    </p>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section id="how">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Convert YouTube to MP3 in three simple steps</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Paste the Link</h3>
+                        <p>Copy-paste your YouTube video link into the field above</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Convert</h3>
+                        <p>Click Convert to start the fast process</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Download</h3>
+                        <p>Download the MP3 file and enjoy your music</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section" id="faq">
+                <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Learn more about YouTube to MP3 conversion</p>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is MP3YT safe?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, MP3YT is completely safe. Your data is deleted after processing and never stored. The YouTube to MP3 conversion happens on our servers and requires no extra software downloads.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How long does conversion take?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Most conversions finish within 30 seconds to 2 minutes. It depends on the video length and your internet speed. Our YouTube MP3 converter is optimized for speed.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What video length can I convert?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can convert videos of almost any length to MP3. Very long videos (over 2-3 hours) may take more time.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What formats are supported?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We currently support MP3. You can download music from YouTube, Dailymotion, and many other video platforms.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do I have to pay?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, MP3YT is completely free. Use the YouTube to MP3 conversion service without paying anything.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Section (duplicate for layout parity) -->
+            <section class="status-section" id="status-section" style="display: none;">
+                <div class="status-card">
+                    <div class="spinner"></div>
+                    <p class="status-text">Converting...</p>
+                </div>
+            </section>
+
+            <!-- Result Section (duplicate for layout parity) -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <div class="result-card">
+                    <div class="song-info">
+                        <div class="thumbnail" id="thumbnail"></div>
+                        <div class="metadata">
+                            <h3 id="song-title">Title</h3>
+                            <p id="song-duration">Duration</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" id="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn btn-secondary" id="new-btn">
+                        <i class="fas fa-redo"></i> New Conversion
+                    </button>
+                </div>
+            </section>
+
+            <!-- Error Section (duplicate for layout parity) -->
+            <section class="error-section" id="error-section" style="display: none;">
+                <div class="error-card">
+                    <p class="error-text">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Something went wrong</span>
+                    </p>
+                    <button class="btn btn-secondary" id="retry-btn">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            </section>
+
+            <!-- Contact Card -->
+            <section class="contact-card-section" id="contact">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Have questions?</h3>
+                    <p>If you have any questions or suggestions, feel free to reach out.</p>
+                    <a href="mailto:contact@mp3yt.link" class="btn btn-primary">contact@mp3yt.link</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/dmca.html">DMCA</a>
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="#how">How It Works</a>
+            </div>
+            <p>&copy; 2026 MP3YT. All rights reserved.</p>
+            <p class="disclaimer">This tool is intended for personal use only.</p>
+            <p class="contact-info">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:contact@mp3yt.link">contact@mp3yt.link</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>

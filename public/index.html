@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MP3YT - YouTube videolarını MP3'e dönüştür. Ücretsiz, hızlı ve güvenli YouTube mp3 dönüştürücü. Herhangi bir YouTube linki paylaş ve anında MP3 olarak indir.">
+    <meta name="keywords" content="youtube mp3, youtube indir, mp3 indir, müzik indir, video mp3, youtube dönüştürücü, online mp3 dönüştürme, ücretsiz youtube mp3, youtube müzik indir">
+    <meta name="author" content="MP3YT">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="MP3YT - YouTube'dan MP3'e Dönüştür">
+    <meta property="og:description" content="Ücretsiz ve hızlı YouTube mp3 dönüştürücü. Herhangi bir YouTube videosunu MP3 olarak indirin.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mp3yt.link">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MP3YT - YouTube'dan MP3'e Dönüştür">
+    <meta name="twitter:description" content="Ücretsiz YouTube mp3 dönüştürücü. Anında müzik indirin.">
+    <title>MP3YT - YouTube'dan MP3'e Dönüştür | Ücretsiz YouTube MP3 Dönüştürücü</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MP3YT",
+        "description": "YouTube videolarını MP3'e dönüştür. Ücretsiz, hızlı ve güvenli YouTube mp3 dönüştürücü.",
+        "url": "https://mp3yt.link",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "TRY"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "MP3YT"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon" aria-hidden="true"></div>
+                    <h1 class="logo-text">MP3YT</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active">Başlangıç</a></li>
+                    <li><a href="#how" class="nav-link">Nasıl Çalışır</a></li>
+                    <li><a href="#faq" class="nav-link">SSS</a></li>
+                    <li><a href="#contact" class="nav-link">İletişim</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="lang-dropdown">
+                        <button class="lang-toggle" id="lang-toggle" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-globe"></i>
+                            <span id="lang-label">TR</span>
+                            <i class="fas fa-chevron-down caret"></i>
+                        </button>
+                        <div class="lang-menu" id="lang-menu" role="menu">
+                            <a class="lang-option active" href="#" aria-label="Türkçe" role="menuitem" data-lang="tr">Türkçe</a>
+                            <a class="lang-option" href="/en" aria-label="English" role="menuitem" data-lang="en">English</a>
+                        </div>
+                    </div>
+                    <button class="theme-toggle" id="theme-toggle" title="Dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h1 id="hero-title">YouTube'dan MP3'e Dönüştür</h1>
+                    <p id="hero-sub">Hızlı, Kolay ve Ücretsiz YouTube MP3 Dönüştürücü</p>
+                </div>
+                <div class="form-wrapper">
+                    <label for="url-input" class="input-label">
+                        <i class="fas fa-link"></i> <span id="label-url">YouTube Linki</span>
+                    </label>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="url-input" 
+                            class="url-input" 
+                            placeholder="https://www.youtube.com/watch?v=..."
+                            aria-label="YouTube URL girin"
+                        >
+                        <button class="btn btn-primary" id="convert-btn">
+                            <i class="fas fa-magic"></i> <span>Dönüştür</span>
+                        </button>
+                    </div>
+                    <p class="input-hint" id="input-hint">YouTube video linkinizi yapıştırın ve anında MP3 olarak indirin</p>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <div class="result-card">
+                    <div class="song-info">
+                        <div class="thumbnail" id="thumbnail"></div>
+                        <div class="metadata">
+                            <h3 id="song-title">Başlık</h3>
+                            <p id="song-duration">Süre</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" id="download-btn">
+                        <i class="fas fa-download"></i> <span>İndir</span>
+                    </button>
+                    <button class="btn btn-secondary" id="new-btn">
+                        <i class="fas fa-redo"></i> <span>Yeni Dönüştürme</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section" id="error-section" style="display: none;">
+                <div class="error-card">
+                    <p class="error-text">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Bir hata oluştu</span>
+                    </p>
+                    <button class="btn btn-secondary" id="retry-btn">
+                        <i class="fas fa-redo"></i> <span>Tekrar Deneyin</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section class="status-section" id="status-section" style="display: none;">
+                <div class="status-card">
+                    <div class="spinner"></div>
+                    <p class="status-text" id="status-text">Dönüştürülüyor...</p>
+                </div>
+            </section>
+
+            <!-- Input Section Features -->
+            <section class="input-section-features">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Hızlı</h3>
+                        <p>Saniyeler içinde dönüştürün</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Güvenli</h3>
+                        <p>Verileriniz gizli kalır</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobil</h3>
+                        <p>Her cihazda çalışır</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Ücretsiz</h3>
+                        <p>Hiç ödeme gerekmez</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEO Content Section -->
+            <section class="seo-content">
+                <div class="seo-text">
+                    <p>
+                        <strong>MP3YT</strong>, YouTube videolarını hızlı ve güvenli bir şekilde <strong>MP3 formatına dönüştüren</strong> en popüler <strong>online mp3 dönüştürücü</strong> hizmetidir. Milyonlarca kullanıcı tarafından tercih edilen MP3YT'de YouTube'dan müzik indirme işlemi hiç bu kadar kolay olmamıştı. Şarkı, podcast, konuşma veya herhangi bir ses içeriği barındıran <strong>YouTube videolarını mp3'e</strong> dönüştürüp <strong>indirme</strong> işlemini sadece birkaç saniyede tamamlayabilirsiniz.
+                    </p>
+                    <p>
+                        Hiçbir yazılım kurulumuna ihtiyaç duymadan, tarayıcınızdan doğrudan <strong>youtube mp3 indirme</strong> yapın. MP3YT'nin avantajları arasında <strong>ücretsiz hizmet</strong>, yüksek ses kalitesi (320kbps'ye kadar), hızlı dönüştürme süresi ve <strong>mobil uyumlu</strong> arayüz yer alır. Windows, Mac, iPhone, Android - tüm cihazlardan <strong>YouTube'dan müzik indir</strong> işlemini sorunsuzca gerçekleştirin.
+                    </p>
+                    <p>
+                        MP3YT'yi seçmek demek, güvenli ve sorumlu bir <strong>youtube mp3 dönüştürme</strong> deneyimi demektir. Tüm işlemler şifreli bağlantılar üzerinde yapılır, verileriniz saklanmaz ve hiçbir reklam sizi rahatsız etmez. Milyonlarca müzik tutkunun tercih ettiği bu platforma katılın ve favori şarkılarınızı offline olarak dinleyin. <strong>YouTube mp3 indir</strong> işlemini en kolay yolla MP3YT'de gerçekleştirin.
+                    </p>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+                <div class="section-header">
+                    <h2>Nasıl Çalışır?</h2>
+                    <p>Üç basit adımda YouTube mp3 dönüştürme işlemi</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Linki Yapıştır</h3>
+                        <p>YouTube video linkini yukarıdaki alana kopyala-yapıştır yap</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Dönüştür</h3>
+                        <p>Dönüştür butonuna tıkla ve hızlı işlemi başla</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>İndir</h3>
+                        <p>MP3 dosyasını indir ve müzik keyfi yap</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section" id="faq">
+                <div class="section-header">
+                    <h2>Sık Sorulan Sorular</h2>
+                    <p>YouTube mp3 dönüştürme hakkında bilgi al</p>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>MP3YT güvenli midir?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Evet, MP3YT tamamen güvenlidir. Verileriniz işlendikten sonra silinir, hiç saklanmaz. YouTube mp3 dönüştürme işlemi sunucularımızda gerçekleşir ve herhangi bir ek yazılım indirmesi gerekmez.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>MP3 indirmesi ne kadar sürer?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Çoğu zaman 30 saniye ile 2 dakika arasında sürer. Video uzunluğu ve internet hızınıza bağlıdır. YouTube mp3 dönüştürücümüz hızlı dönüştürme için optimize edilmiştir.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Kaç dakikalık videoları dönüştürebilirim?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Teorik olarak herhangi bir uzunluktaki videoyu mp3 olarak indirebilirsiniz. Ancak çok uzun videolar (2-3 saatin üstü) daha fazla zaman alabilir.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Hangi formatları destekliyorsunuz?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Şu anda MP3 formatını destekliyoruz. YouTube, Dailymotion ve diğer birçok video platformundan müzik indirme yapabilirsiniz.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Ücret ödemek zorunda mıyım?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Hayır, MP3YT tamamen ücretsizdir. YouTube mp3 dönüştürme hizmetini hiç ödeme yapmadan sınırsız kullanabilirsiniz.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section class="status-section" id="status-section" style="display: none;">
+                <div class="status-card">
+                    <div class="spinner"></div>
+                    <p class="status-text">Dönüştürülüyor...</p>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <div class="result-card">
+                    <div class="song-info">
+                        <div class="thumbnail" id="thumbnail"></div>
+                        <div class="metadata">
+                            <h3 id="song-title">Başlık</h3>
+                            <p id="song-duration">Süre</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" id="download-btn">
+                        <i class="fas fa-download"></i> İndir
+                    </button>
+                    <button class="btn btn-secondary" id="new-btn">
+                        <i class="fas fa-redo"></i> Yeni Dönüştürme
+                    </button>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section" id="error-section" style="display: none;">
+                <div class="error-card">
+                    <p class="error-text">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Bir hata oluştu</span>
+                    </p>
+                    <button class="btn btn-secondary" id="retry-btn">
+                        <i class="fas fa-redo"></i> Tekrar Deneyin
+                    </button>
+                </div>
+            </section>
+
+            <!-- Contact Card -->
+            <section class="contact-card-section" id="contact">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Sorularınız mı var?</h3>
+                    <p>Herhangi bir sorunuz veya öneriniz varsa bize ulaşmaktan çekinmeyin.</p>
+                    <a href="mailto:contact@mp3yt.link" class="btn btn-primary">contact@mp3yt.link</a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="/dmca.html">DMCA</a>
+                <a href="/privacy.html">Gizlilik</a>
+                <a href="/terms.html">Kullanım Şartları</a>
+                <a href="#how">Nasıl Çalışır</a>
+            </div>
+            <p>&copy; 2026 MP3YT. Tüm hakları saklıdır.</p>
+            <p class="disclaimer">Bu araç yalnızca kişisel kullanım için tasarlanmıştır.</p>
+            <p class="contact-info">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:contact@mp3yt.link">contact@mp3yt.link</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "mp3yt",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "MP3YT - YouTube to MP3 Converter",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.16.6"
+  }
+}
