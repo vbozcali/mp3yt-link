@@ -5,4 +5,5 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	// Static build - serve public files as-is
 	output: 'static',
+	trailingSlash: 'never',
 });
