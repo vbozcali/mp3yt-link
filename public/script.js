@@ -218,6 +218,7 @@ function performConversion(videoID) {
  */
 function showStatus() {
     hideAllSections();
+    document.body.style.overflow = 'hidden';
     statusSection.style.display = 'block';
 }
 
@@ -226,6 +227,7 @@ function showStatus() {
  */
 function showError(message) {
     hideAllSections();
+    document.body.style.overflow = 'hidden';
     document.getElementById('error-text').textContent = message;
     errorSection.style.display = 'block';
 }
@@ -235,6 +237,7 @@ function showError(message) {
  */
 function showResult(data) {
     hideAllSections();
+    document.body.style.overflow = 'hidden';
     document.getElementById('song-title').textContent = data.title + '.mp3';
     document.getElementById('song-duration').textContent = data.duration;
     
@@ -260,6 +263,7 @@ function hideAllSections() {
     statusSection.style.display = 'none';
     resultSection.style.display = 'none';
     errorSection.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
 /**
